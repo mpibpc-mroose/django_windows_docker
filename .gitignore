@@ -1,1 +1,4 @@
 .idea
+volumes/django/mediafiles/*
+volumes/django/staticfiles/*
+
