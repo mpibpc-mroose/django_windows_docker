@@ -1,8 +1,5 @@
 version: '3.7'
 
-volumes:
-  mariadb_data_volume:
-
 services:
   django:
     build:
