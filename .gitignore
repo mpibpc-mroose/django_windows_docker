@@ -1,4 +1,4 @@
 .idea
 volumes/django/mediafiles/*
 volumes/django/staticfiles/*
-
+source/db.sqlite3
