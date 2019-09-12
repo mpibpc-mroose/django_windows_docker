@@ -1,0 +1,1 @@
+here I just placed the content of the conf folder of the nginx ZIP and adapted the nginx.conf

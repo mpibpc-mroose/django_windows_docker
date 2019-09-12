@@ -1,0 +1,36 @@
+version: '3.7'
+
+volumes:
+  mariadb_data_volume:
+
+services:
+  django:
+    build:
+      context: .
+    container_name: django-test
+    restart: always
+    command: waitress-serve --listen=*:8000 dj_test.wsgi:application
+    volumes:
+      - ./volumes/django/staticfiles:C:/source/staticfiles
+      - ./volumes/django/mediafiles:C:/source/mediafiless
+    environment:
+      - SECRET_KEY=vqiwbkyf97nc9n91hkx228c0bac3knwdr1f7ei93m0xf00vebs98tr0z3hdf8cc
+      - DEBUG=on
+      # of course you could add a "real" database
+      # anyway think about the database persistence!
+      - DATABASE_URL=sqlite://
+
+  nginx:
+    build: ./nginx
+    container_name: django-test-nginx
+    restart: always
+    volumes:
+      - ./volumes/django/:C:/nginx/html/
+      - ./volumes/nginx/conf:C:/nginx/conf
+      - ./volumes/nginx/certs:C:/nginx/certs
+    ports:
+      - 80:80
+      # for https:// support you have to adapt nginx.conf
+      - 443:443
+    depends_on:
+      - django
